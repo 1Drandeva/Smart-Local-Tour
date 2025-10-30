@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR/VR Experience - Bulgaria Local Experiences</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #f8f9fa;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+
+        .ar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ar-header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        .ar-header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .ar-header p {
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .ar-content {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .city-info {
+            margin-bottom: 30px;
+        }
+
+        .city-info h2 {
+            color: #333;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .city-info p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .ar-image-container {
+            margin: 30px 0;
+            position: relative;
+        }
+
+        .ar-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .ar-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.1);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .ar-overlay:hover {
+            opacity: 1;
+        }
+
+        .ar-overlay-content {
+            background: rgba(255,255,255,0.9);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .ar-controls {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .ar-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .ar-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .ar-btn.secondary {
+            background: linear-gradient(45deg, #f093fb, #f5576c);
+        }
+
+        .ar-btn.tertiary {
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+        }
+
+        .ar-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .ar-feature {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+        }
+
+        .ar-feature i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #ffd700;
+        }
+
+        .ar-feature h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .ar-feature p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.9);
+            color: #333;
+            border: 2px solid #e9ecef;
+            padding: 15px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,1);
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        @media (max-width: 768px) {
+            .ar-header h1 {
+                font-size: 2rem;
+            }
+            
+            .ar-content {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .ar-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .ar-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="back-btn" onclick="goBack()">
+        <i class="fas fa-arrow-left"></i>
+    </button>
+
+    <div class="ar-container">
+        <div class="ar-header">
+            <h1><i class="fas fa-cube"></i> AR/VR Experience</h1>
+            <p>Immersive Augmented & Virtual Reality for <span id="cityName">Your City</span></p>
+        </div>
+
+        <div class="ar-content">
+            <div class="city-info">
+                <h2 id="cityTitle">Welcome to AR/VR</h2>
+                <p id="cityDescription">Experience this location like never before with our advanced AR/VR technology.</p>
+            </div>
+
+            <div class="ar-image-container">
+                <img id="arImage" src="" alt="AR Experience" class="ar-image">
+                <div class="ar-overlay">
+                    <div class="ar-overlay-content">
+                        <h3>AR View Active</h3>
+                        <p>Point your camera at the image to start the AR experience</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ar-controls">
+                <button class="ar-btn" onclick="startVR()">
+                    <i class="fas fa-vr-cardboard"></i> Start VR
+                </button>
+                <button class="ar-btn secondary" onclick="startAR()">
+                    <i class="fas fa-mobile-alt"></i> Start AR
+                </button>
+                <button class="ar-btn tertiary" onclick="takePhoto()">
+                    <i class="fas fa-camera"></i> Take Photo
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Get city data from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const city = urlParams.get('city') || 'Unknown City';
+        const cityData = urlParams.get('data') ? JSON.parse(decodeURIComponent(urlParams.get('data'))) : null;
+
+        // Update page content based on city
+        document.getElementById('cityName').textContent = city;
+        document.getElementById('cityTitle').textContent = `AR/VR Experience: ${city}`;
+        
+        if (cityData) {
+            document.getElementById('cityDescription').textContent = cityData.description || `Experience ${city} like never before with our advanced AR/VR technology.`;
+            if (cityData.image) {
+                document.getElementById('arImage').src = cityData.image;
+            }
+        }
+
+        // Set default AR image if none provided
+        if (!document.getElementById('arImage').src) {
+            document.getElementById('arImage').src = 'Ar%20Vr/ChatGPT%20Image%20Oct%205,%202025,%2011_54_48%20AM.png';
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+
+        function startAR() {
+            // Show the Dolmens video
+            showDolmensVideo();
+        }
+
+        function showDolmensVideo() {
+            // Remove existing video if any
+            const existingVideo = document.getElementById('dolmensVideo');
+            if (existingVideo) {
+                existingVideo.remove();
+            }
+
+            // Create video element
+            const video = document.createElement('video');
+            video.id = 'dolmensVideo';
+            video.controls = true;
+            video.autoplay = true;
+            video.style.cssText = `
+                width: 100%;
+                max-width: 800px;
+                height: auto;
+                border-radius: 15px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+                margin: 20px auto;
+                display: block;
+            `;
+
+            // Try different possible video file names
+            const possibleVideoNames = [
+                'Dolmens.mp4',
+                'Dolmens.mov',
+                'Dolmens.avi',
+                'Dolmens.mkv',
+                'dolmens.mp4',
+                'dolmens.mov',
+                'dolmens.avi',
+                'dolmens.mkv'
+            ];
+
+            // Create source elements for different formats
+            possibleVideoNames.forEach(name => {
+                const source = document.createElement('source');
+                source.src = name;
+                source.type = `video/${name.split('.').pop()}`;
+                video.appendChild(source);
+            });
+
+            // Add error handling
+            video.onerror = function() {
+                console.log('Video not found, trying alternative...');
+                // Try with different path
+                video.src = './Dolmens.mp4';
+            };
+
+            video.onloadstart = function() {
+                console.log('Loading Dolmens video...');
+            };
+
+            // Add video to the page
+            const arContent = document.querySelector('.ar-content');
+            if (arContent) {
+                arContent.appendChild(video);
+                
+                // Scroll to video
+                video.scrollIntoView({ behavior: 'smooth' });
+            }
+
+            // Show success message
+            alert('AR Experience Started!\n\nLoading Dolmens video...\n\nThis video shows the ancient Thracian dolmens in the area.');
+        }
+
+        function startVR() {
+            alert('VR Experience Started!\n\nPut on your VR headset or use your phone in VR mode.\n\nFeatures:\n• 360° immersive environment\n• Virtual tour of the location\n• Interactive historical scenes\n• Spatial audio experience');
+        }
+
+        function takePhoto() {
+            alert('Photo captured!\n\nYour AR photo has been saved to your device.');
+        }
+
+        function shareExperience() {
+            if (navigator.share) {
+                navigator.share({
+                    title: `AR Experience: ${city}`,
+                    text: `Check out this amazing AR experience in ${city}!`,
+                    url: window.location.href
+                });
+            } else {
+                // Fallback for browsers that don't support Web Share API
+                const shareText = `Check out this amazing AR experience in ${city}! ${window.location.href}`;
+                navigator.clipboard.writeText(shareText).then(() => {
+                    alert('Link copied to clipboard!');
+                }).catch(() => {
+                    alert(`Share this link: ${window.location.href}`);
+                });
+            }
+        }
+
+        // Add some interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate elements on load
+            const elements = document.querySelectorAll('.ar-feature, .ar-btn');
+            elements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    el.style.transition = 'all 0.5s ease';
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>

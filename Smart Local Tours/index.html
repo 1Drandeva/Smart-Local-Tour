@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulgaria Local Experiences</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Subtle Background Pattern -->
+    <div class="subtle-background" id="subtleBackground"></div>
+
+    <div class="container">
+        <!-- Navigation Header -->
+        <header class="main-navigation">
+            <div class="nav-content">
+                <div class="nav-logo">
+                    <h2 class="logo-text">Bulgaria Local Experiences</h2>
+                </div>
+                <div class="nav-buttons">
+                    <button class="nav-button sign-in-btn" onclick="openSignInModal()">Sign In</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">Discover Bulgaria Your Way</h1>
+                <p class="hero-subtitle">AI-powered, personalized local experiences for travelers and locals.</p>
+                <p class="hero-price">Starts at FREE. Premium from $9.99/month.</p>
+                
+                <div class="email-signup">
+                    <h3 class="signup-title">Ready to explore? Enter your email to get started.</h3>
+                    <div class="signup-form">
+                        <input type="email" placeholder="Email address" class="email-input">
+                        <button class="signup-button" onclick="openRegistrationModal()">Get Started</button>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-background">
+                <div class="bulgaria-map">
+                    <div class="map-hotspot sofia" data-city="sofia">
+                        <span class="hotspot-label">Sofia</span>
+                    </div>
+                    <div class="map-hotspot plovdiv" data-city="plovdiv">
+                        <span class="hotspot-label">Plovdiv</span>
+                    </div>
+                    <div class="map-hotspot veliko-tarnovo" data-city="veliko-tarnovo">
+                        <span class="hotspot-label">Veliko Tarnovo</span>
+                    </div>
+                    <div class="map-hotspot topolovgrad" data-city="topolovgrad">
+                        <span class="hotspot-label">Topolovgrad</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Value Pillars Section -->
+        <section class="value-pillars-section">
+            <div class="value-pillars-content">
+                <h2 class="section-title">Why Choose Our Platform</h2>
+                <div class="pillars-grid">
+                    <div class="pillar-item">
+                        <div class="pillar-icon">🆓</div>
+                        <h3 class="pillar-title">Freemium</h3>
+                        <p class="pillar-description">Free basic tours with premium AI personalization</p>
+                    </div>
+                    <div class="pillar-item">
+                        <div class="pillar-icon">🤝</div>
+                        <h3 class="pillar-title">Partnerships</h3>
+                        <p class="pillar-description">Local business discounts and exclusive access</p>
+                    </div>
+                    <div class="pillar-item">
+                        <div class="pillar-icon">🌸</div>
+                        <h3 class="pillar-title">Seasonal Tours</h3>
+                        <p class="pillar-description">Year-round experiences tailored to seasons</p>
+                    </div>
+                    <div class="pillar-item">
+                        <div class="pillar-icon">🥽</div>
+                        <h3 class="pillar-title">AR/VR</h3>
+                        <p class="pillar-description">Immersive historical experiences and virtual tours</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section class="how-it-works-section">
+            <div class="how-it-works-content">
+                <h2 class="section-title">How It Works</h2>
+                <div class="steps-container">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <h3 class="step-title">Choose Your City & Interests</h3>
+                        <p class="step-description">Select from our curated Bulgarian cities and tell us your interests</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <h3 class="step-title">AI Creates Your Tour</h3>
+                        <p class="step-description">Our AI crafts a personalized walking tour or day plan just for you</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <h3 class="step-title">Explore & Experience</h3>
+                        <p class="step-description">Navigate with offline maps, enjoy discounts, and try AR/VR extras</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Business Model Section -->
+        <section class="business-model-section">
+            <div class="business-model-content">
+                <h2 class="section-title">Choose Your Plan</h2>
+                <div class="pricing-table">
+                    <div class="pricing-card free">
+                        <div class="pricing-header">
+                            <h3 class="plan-name">Free</h3>
+                            <div class="plan-price">$0<span class="period">/month</span></div>
+                        </div>
+                        <ul class="plan-features">
+                            <li>Basic city tours</li>
+                            <li>Limited daily routes</li>
+                            <li>Online maps only</li>
+                            <li>Community access</li>
+                        </ul>
+                        <button class="plan-button" onclick="showFreePlanOptions()">Get Started</button>
+                    </div>
+                    <div class="pricing-card premium">
+                        <div class="pricing-header">
+                            <h3 class="plan-name">Premium</h3>
+                            <div class="plan-price">$9.99<span class="period">/month</span></div>
+                        </div>
+                        <ul class="plan-features">
+                            <li>AI personalization</li>
+                            <li>Offline access</li>
+                            <li>Local discounts</li>
+                            <li>Priority seasonal tours</li>
+                            <li>AR/VR experiences</li>
+                        </ul>
+                        <button class="plan-button primary" onclick="window.location.href='register.html?plan=premium'">Upgrade Now</button>
+                    </div>
+                    <div class="pricing-card annual">
+                        <div class="pricing-header">
+                            <h3 class="plan-name">Annual Pass</h3>
+                            <div class="plan-price">$79.99<span class="period">/year</span></div>
+                            <div class="savings">Save 33%</div>
+                            <div class="trial-badge">7-day free trial</div>
+                        </div>
+                        <ul class="plan-features">
+                            <li>Everything in Premium</li>
+                            <li>Exclusive events</li>
+                            <li>Priority support</li>
+                            <li>Early access to new cities</li>
+                        </ul>
+                        <button class="plan-button primary" onclick="window.location.href='annual-pass-registration.html'">Best Value</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials-section">
+            <div class="testimonials-content">
+                <h2 class="section-title">What Our Users Say</h2>
+                <div class="testimonials-grid">
+                    <div class="testimonial-item">
+                        <div class="testimonial-text">
+                            "The AI tour guide was incredible! It took me to places I never would have found on my own in Sofia."
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-name">Maria K.</div>
+                            <div class="author-location">Sofia, Bulgaria</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-item">
+                        <div class="testimonial-text">
+                            "Perfect for discovering hidden gems in Plovdiv. The offline maps saved me when I lost internet connection."
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-name">James L.</div>
+                            <div class="author-location">London, UK</div>
+                        </div>
+                    </div>
+                    <div class="testimonial-item">
+                        <div class="testimonial-text">
+                            "The AR features brought Veliko Tarnovo's history to life. My kids loved it!"
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-name">Anna P.</div>
+                            <div class="author-location">Berlin, Germany</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <div class="faq-content">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <div class="faq-list">
+                    <div class="faq-item" id="faq1">
+                        <button class="faq-question" onclick="toggleFAQ('faq1')">
+                            <span>What is Bulgaria Local Experience?</span>
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Bulgaria Local Experience is a mobile app that creates personalized local adventures for tourists and locals alike. Tailored to your interests, schedule, and budget, it offers walking tours, top food spots, cultural events, and hidden gems across Bulgarian cities like Sofia, Plovdiv, Veliko Tarnovo, and coastal towns. Plus, enjoy free audio guides for the top attractions in each town, making it easy to explore and learn on the go.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item" id="faq2">
+                        <button class="faq-question" onclick="toggleFAQ('faq2')">
+                            <span>How much does it cost?</span>
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p><strong>Free Plan:</strong> Access basic tours and audio guides online.</p>
+                            <p><strong>Premium Plan:</strong> Unlock AI personalization, offline guides, exclusive discounts, and more.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item" id="faq3">
+                        <button class="faq-question" onclick="toggleFAQ('faq3')">
+                            <span>Which cities are available?</span>
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Topolovgrad, Sevlievo, Ruse, Belene, Veliko Tarnovo, Lovech, Batak, Koprivshtitsa, Melnik.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item" id="faq4">
+                        <button class="faq-question" onclick="toggleFAQ('faq4')">
+                            <span>Do I need an internet connection?</span>
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p><strong>Free plan:</strong> Requires internet to access guides.</p>
+                            <p><strong>Premium plan:</strong> Download guides and enjoy them offline.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item" id="faq5">
+                        <button class="faq-question" onclick="toggleFAQ('faq5')">
+                            <span>How does the AI personalization work?</span>
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Our AI tailors recommendations in real time based on your preferences, current weather, and time of day, ensuring each tour feels unique.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item" id="faq6">
+                        <button class="faq-question" onclick="toggleFAQ('faq6')">
+                            <span>Can I cancel anytime?</span>
+                            <span class="faq-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes! You're free to cancel your subscription at any time — no hassle.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Registration Modal -->
+    <div id="registrationModal" class="modal-overlay">
+        <div class="modal-content registration-modal">
+            <div class="modal-header">
+                <h2>Choose Your Plan & Sign Up</h2>
+                <button class="close-modal" onclick="closeRegistrationModal()">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <!-- Plan Selection -->
+                <div class="plan-selection-section">
+                    <h3>Select Your Plan</h3>
+                    <div class="modal-plan-cards">
+                        <div class="modal-plan-card" data-plan="free">
+                            <div class="modal-plan-header">
+                                <h4>Free</h4>
+                                <div class="modal-plan-price">$0<span>/month</span></div>
+                            </div>
+                            <ul class="modal-plan-features">
+                                <li>Basic city tours</li>
+                                <li>Limited daily routes</li>
+                                <li>Online maps only</li>
+                                <li>Community access</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="modal-plan-card" data-plan="premium">
+                            <div class="modal-plan-header">
+                                <h4>Premium</h4>
+                                <div class="modal-plan-price">$9.99<span>/month</span></div>
+                            </div>
+                            <ul class="modal-plan-features">
+                                <li>AI personalization</li>
+                                <li>Offline access</li>
+                                <li>Local discounts</li>
+                                <li>Priority seasonal tours</li>
+                                <li>AR/VR experiences</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="modal-plan-card" data-plan="annual">
+                            <div class="modal-plan-header">
+                                <h4>Annual Pass</h4>
+                                <div class="modal-plan-price">$79.99<span>/year</span></div>
+                                <div class="modal-savings">Save 33%</div>
+                            </div>
+                            <ul class="modal-plan-features">
+                                <li>Everything in Premium</li>
+                                <li>Exclusive events</li>
+                                <li>Priority support</li>
+                                <li>Early access to new cities</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Registration Form -->
+                <div class="registration-form-section">
+                    <h3>Create Your Account</h3>
+                    <form id="registrationForm" class="registration-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" required>
+                        </div>
+                        
+                        <div class="selected-plan-display">
+                            <span>Selected Plan: </span>
+                            <span id="selectedPlanText">Free</span>
+                        </div>
+                        
+                        <!-- Payment Section (shown for paid plans) -->
+                        <div id="paymentSection" class="payment-section" style="display: none;">
+                            <h4>Payment Information</h4>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="cardNumber">Card Number</label>
+                                    <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
+                                </div>
+                                <div class="form-group">
+                                    <label for="expiryDate">Expiry Date</label>
+                                    <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY" maxlength="5">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="cvv">CVV</label>
+                                    <input type="text" id="cvv" name="cvv" placeholder="123" maxlength="4">
+                                </div>
+                                <div class="form-group">
+                                    <label for="cardholderName">Cardholder Name</label>
+                                    <input type="text" id="cardholderName" name="cardholderName" placeholder="John Doe">
+                                </div>
+                            </div>
+                            
+                            <!-- Payment Summary -->
+                            <div class="payment-summary">
+                                <div class="summary-row">
+                                    <span id="planName">Premium Plan</span>
+                                    <span id="planPrice">$9.99</span>
+                                </div>
+                                <div class="summary-row total">
+                                    <span>Total</span>
+                                    <span id="totalPrice">$9.99</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="submit-registration">
+                            <span id="submitButtonText">Create Account & Continue</span>
+                        </button>
+                        
+                        <p class="login-link">
+                            Already have an account? <a href="register.html">Sign In</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sign In Modal -->
+    <div id="signInModal" class="modal-overlay">
+        <div class="modal-content signin-modal">
+            <div class="modal-header">
+                <h2>Sign In</h2>
+                <button class="close-modal" onclick="closeSignInModal()">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <form id="signInForm" class="signin-form">
+                    <div class="form-group">
+                        <label for="signInEmail">Email Address</label>
+                        <input type="email" id="signInEmail" name="email" required placeholder="Enter your email">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="signInPassword">Password</label>
+                        <input type="password" id="signInPassword" name="password" required placeholder="Enter your password">
+                    </div>
+                    
+                    <div class="form-options">
+                        <label class="remember-me">
+                            <input type="checkbox" id="rememberMe">
+                            <span>Remember me</span>
+                        </label>
+                        <a href="#" class="forgot-password">Forgot password?</a>
+                    </div>
+                    
+                    <button type="submit" class="submit-signin">
+                        Sign In
+                    </button>
+                    
+                    <p class="signup-link">
+                        Don't have an account? <a href="#" onclick="closeSignInModal(); openRegistrationModal();">Sign up</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

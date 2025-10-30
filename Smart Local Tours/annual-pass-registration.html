@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Annual Pass Registration - Bulgaria Local Experience</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background: #f8f9fa;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .registration-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 15px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .registration-content {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 500px;
+            border: 2px solid #a5d6a7;
+            align-items: stretch;
+        }
+
+        .left-section {
+            background: linear-gradient(135deg, #a5d6a7 0%, #c8e6c9 100%);
+            color: #1b5e20;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            height: 100%;
+        }
+
+        .right-section {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .pass-badge {
+            background: #4caf50;
+            color: white;
+            padding: 6px 15px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .annual-pass-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #1b5e20;
+        }
+
+        .price-section {
+            margin: 18px 0;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: rgba(27, 94, 32, 0.7);
+            font-size: 14px;
+        }
+
+        .current-price {
+            font-size: 32px;
+            font-weight: 700;
+            margin: 10px 0;
+            color: #1b5e20;
+        }
+
+        .period {
+            font-size: 16px;
+            color: rgba(27, 94, 32, 0.8);
+        }
+
+        .savings {
+            background: #4caf50;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 8px;
+        }
+
+        .trial-badge {
+            background: #c8e6c9;
+            color: #1b5e20;
+            padding: 8px 16px;
+            border-radius: 15px;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 15px;
+        }
+
+        .features-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .features-list li {
+            padding: 6px 0;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .features-list li i {
+            color: #4caf50;
+            margin-right: 10px;
+            font-size: 14px;
+        }
+
+        .form-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 12px;
+            background: none;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            color: #666;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .tab-button.active {
+            color: #4caf50;
+            border-bottom-color: #4caf50;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #4caf50;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .payment-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .payment-section h3 {
+            color: #333;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .payment-summary {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            font-size: 14px;
+        }
+
+        .summary-row.total {
+            font-weight: 700;
+            font-size: 16px;
+            border-top: 2px solid #e0e0e0;
+            padding-top: 10px;
+            margin-top: 8px;
+        }
+
+        .submit-button {
+            width: 100%;
+            background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(76, 175, 80, 0.3);
+        }
+
+        .submit-button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .security-note {
+            text-align: center;
+            margin-top: 15px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .security-note i {
+            color: #4caf50;
+            margin-right: 5px;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(76, 175, 80, 0.9);
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-button:hover {
+            background: rgba(76, 175, 80, 1);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .registration-content {
+                grid-template-columns: 1fr;
+                margin: 10px;
+            }
+            
+            .left-section, .right-section {
+                padding: 20px 15px;
+            }
+            
+            .annual-pass-title {
+                font-size: 20px;
+            }
+            
+            .current-price {
+                font-size: 28px;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="back-button" onclick="window.location.href='index.html'">
+        <i class="fas fa-arrow-left"></i> Back to Home
+    </button>
+
+    <div class="registration-container">
+        <div class="registration-content">
+            <!-- Left Section - Annual Pass Info -->
+            <div class="left-section">
+                <div class="pass-badge">BEST VALUE</div>
+                <h1 class="annual-pass-title">Annual Pass</h1>
+                
+                <div class="price-section">
+                    <div class="original-price">$119.88</div>
+                    <div class="current-price">$79.99<span class="period">/year</span></div>
+                    <div class="savings">Save 33%</div>
+                </div>
+                
+                <div class="trial-badge">7-day free trial</div>
+                
+                <ul class="features-list">
+                    <li><i class="fas fa-check"></i> Unlimited premium city tours</li>
+                    <li><i class="fas fa-check"></i> AI-powered personalized experiences</li>
+                    <li><i class="fas fa-check"></i> Premium audio guides</li>
+                    <li><i class="fas fa-check"></i> AR/VR experiences</li>
+                    <li><i class="fas fa-check"></i> Offline maps and guides</li>
+                    <li><i class="fas fa-check"></i> Local business discounts</li>
+                    <li><i class="fas fa-check"></i> Exclusive seasonal tours</li>
+                    <li><i class="fas fa-check"></i> Priority customer support</li>
+                    <li><i class="fas fa-check"></i> Early access to new cities</li>
+                </ul>
+            </div>
+
+            <!-- Right Section - Registration/Payment -->
+            <div class="right-section">
+                <div class="form-tabs">
+                    <button class="tab-button active" onclick="switchTab('signin')">Sign In</button>
+                    <button class="tab-button" onclick="switchTab('register')">Register</button>
+                </div>
+
+                <!-- Sign In Form -->
+                <div id="signin" class="tab-content active">
+                    <form id="signinForm">
+                        <div class="form-group">
+                            <label for="signinEmail">Email Address</label>
+                            <input type="email" id="signinEmail" placeholder="your@email.com" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="signinPassword">Password</label>
+                            <input type="password" id="signinPassword" placeholder="Enter your password" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox"> Remember me
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="submit-button">
+                            <i class="fas fa-sign-in-alt"></i> Sign In & Continue
+                        </button>
+                        
+                        <div class="security-note">
+                            <p><i class="fas fa-shield-alt"></i> Your account is secure and encrypted</p>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Registration Form -->
+                <div id="register" class="tab-content">
+                    <form id="registerForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" placeholder="John" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" placeholder="Doe" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="registerEmail">Email Address</label>
+                            <input type="email" id="registerEmail" placeholder="john@example.com" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="registerPassword">Password</label>
+                            <input type="password" id="registerPassword" placeholder="Create a strong password" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" required> I agree to the Terms of Service and Privacy Policy
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="submit-button">
+                            <i class="fas fa-user-plus"></i> Create Account & Continue
+                        </button>
+                        
+                        <div class="security-note">
+                            <p><i class="fas fa-shield-alt"></i> Your account is secure and encrypted</p>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Payment Section -->
+                <div class="payment-section">
+                    <h3><i class="fas fa-credit-card"></i> Payment Information</h3>
+                    
+                    <form id="paymentForm">
+                        <div class="form-group">
+                            <label for="cardNumber">Card Number</label>
+                            <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" required>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="expiryDate">Expiry Date</label>
+                                <input type="text" id="expiryDate" placeholder="MM/YY" maxlength="5" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="cvv">CVV</label>
+                                <input type="text" id="cvv" placeholder="123" maxlength="4" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="cardholderName">Cardholder Name</label>
+                            <input type="text" id="cardholderName" placeholder="John Doe" required>
+                        </div>
+                        
+                        <div class="payment-summary">
+                            <div class="summary-row">
+                                <span>Annual Pass</span>
+                                <span>$79.99</span>
+                            </div>
+                            <div class="summary-row total">
+                                <span>Total</span>
+                                <span>$79.99</span>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="submit-button">
+                            <i class="fas fa-lock"></i> Complete Payment - $79.99
+                        </button>
+                        
+                        <div class="security-note">
+                            <p><i class="fas fa-shield-alt"></i> Your payment is secure and encrypted</p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching functionality
+        function switchTab(tabName) {
+            // Remove active class from all tabs and contents
+            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            // Add active class to selected tab and content
+            event.target.classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+
+        // Initialize form functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeForms();
+        });
+
+        function initializeForms() {
+            const cardNumber = document.getElementById('cardNumber');
+            const expiryDate = document.getElementById('expiryDate');
+            
+            // Format card number with spaces
+            cardNumber.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+                let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+                if (formattedValue.length <= 19) {
+                    e.target.value = formattedValue;
+                }
+            });
+            
+            // Format expiry date
+            expiryDate.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length >= 2) {
+                    value = value.substring(0, 2) + '/' + value.substring(2, 4);
+                }
+                e.target.value = value;
+            });
+            
+            // Handle sign in form
+            document.getElementById('signinForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                processSignIn();
+            });
+            
+            // Handle registration form
+            document.getElementById('registerForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                processRegistration();
+            });
+            
+            // Handle payment form
+            document.getElementById('paymentForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                processPayment();
+            });
+        }
+
+        function processSignIn() {
+            const button = document.querySelector('#signinForm .submit-button');
+            const originalText = button.innerHTML;
+            
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing In...';
+            button.disabled = true;
+            
+            setTimeout(() => {
+                alert('Sign in successful! 🎉\n\nYou can now complete your Annual Pass payment.');
+                button.innerHTML = originalText;
+                button.disabled = false;
+            }, 2000);
+        }
+
+        function processRegistration() {
+            const button = document.querySelector('#registerForm .submit-button');
+            const originalText = button.innerHTML;
+            
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Account...';
+            button.disabled = true;
+            
+            setTimeout(() => {
+                alert('Account created successfully! 🎉\n\nYou can now complete your Annual Pass payment.');
+                button.innerHTML = originalText;
+                button.disabled = false;
+            }, 2000);
+        }
+
+        function processPayment() {
+            const button = document.querySelector('#paymentForm .submit-button');
+            const originalText = button.innerHTML;
+            
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing Payment...';
+            button.disabled = true;
+            
+            setTimeout(() => {
+                alert('Payment successful! 🎉\n\nYour Annual Pass has been activated!\nYou now have access to all premium features for 1 year!\n\nRedirecting to premium explore...');
+                
+                // Redirect to premium explore page
+                window.location.href = 'premium-explore.html';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

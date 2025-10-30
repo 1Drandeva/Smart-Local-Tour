@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - Bulgaria Local Experiences</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Bulgarian Embroidery Background -->
+    <div class="subtle-background" id="subtleBackground"></div>
+
+    <div class="container">
+        <!-- Sign In Header -->
+        <header class="signin-header">
+            <div class="signin-header-content">
+                <h1 class="signin-title">Welcome Back</h1>
+                <p class="signin-subtitle">Sign in to continue exploring Bulgaria</p>
+            </div>
+        </header>
+
+        <!-- Sign In Form Section -->
+        <section class="signin-section">
+            <div class="signin-content">
+                <div class="signin-form-container">
+                    <div class="signin-form-header">
+                        <h2 class="form-title">Sign In</h2>
+                        <p class="form-subtitle">Enter your credentials to access your account</p>
+                    </div>
+
+                    <form class="signin-form" id="signinForm">
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" id="email" name="email" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" id="password" name="password" class="form-input" required>
+                        </div>
+
+                        <div class="form-group checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="rememberMe" name="rememberMe">
+                                <span class="checkmark"></span>
+                                Remember me
+                            </label>
+                        </div>
+
+                        <button type="submit" class="signin-button">
+                            <span>Sign In</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </form>
+
+                    <div class="signin-links">
+                        <p><a href="#" class="link">Forgot your password?</a></p>
+                        <p>Don't have an account? <a href="register.html" class="link">Sign up here</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Sign in form handling
+        document.getElementById('signinForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const userData = {
+                email: formData.get('email'),
+                password: formData.get('password'),
+                rememberMe: formData.get('rememberMe')
+            };
+
+            // Basic validation
+            if (!userData.email || !userData.password) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            // For demo purposes, accept any email/password combination
+            // In a real app, this would validate against a database
+            if (userData.email && userData.password) {
+                // Store user data
+                localStorage.setItem('userEmail', userData.email);
+                localStorage.setItem('isSignedIn', 'true');
+                
+                // Redirect to explore page
+                window.location.href = 'explore.html';
+            }
+        });
+
+        // Auto-fill email if available
+        window.addEventListener('load', function() {
+            const storedEmail = localStorage.getItem('userEmail');
+            if (storedEmail) {
+                document.getElementById('email').value = storedEmail;
+            }
+        });
+    </script>
+</body>
+</html>
