@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Bulgarian Cities - Bulgaria Local Experiences</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Subtle Background Pattern -->
+    <div class="subtle-background" id="subtleBackground"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="title">Explore Bulgarian Cities</h1>
+                <p class="subtitle">Select a city to discover its unique experiences</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Cities Section -->
+            <section class="cities-section">
+                <div class="city-section">
+                    <h2 class="section-title">Choose Your City</h2>
+                    <div class="city-grid">
+                        <div class="city-card" data-city="topolovgrad">
+                            <div class="city-info">
+                                <h3 class="city-name">Topolovgrad</h3>
+                                <p class="city-region">Haskovo</p>
+                                <p class="city-population">Pop: 5.4K</p>
+                            </div>
+                            <i class="fas fa-map-marker-alt city-icon"></i>
+                        </div>
+
+                        <div class="city-card" data-city="sevlievo">
+                            <div class="city-info">
+                                <h3 class="city-name">Sevlievo</h3>
+                                <p class="city-region">Gabrovo</p>
+                                <p class="city-population">Pop: 24K</p>
+                            </div>
+                            <i class="fas fa-map-marker-alt city-icon"></i>
+                        </div>
+
+                        <div class="city-card" data-city="ruse">
+                            <div class="city-info">
+                                <h3 class="city-name">Ruse</h3>
+                                <p class="city-region">Ruse</p>
+                                <p class="city-population">Pop: 144K</p>
+                            </div>
+                            <i class="fas fa-map-marker-alt city-icon"></i>
+                        </div>
+
+                        <div class="city-card" data-city="belene">
+                            <div class="city-info">
+                                <h3 class="city-name">Belene</h3>
+                                <p class="city-region">Pleven</p>
+                                <p class="city-population">Pop: 8.5K</p>
+                            </div>
+                            <i class="fas fa-map-marker-alt city-icon"></i>
+                        </div>
+
+                        <div class="city-card" data-city="veliko-tarnovo">
+                            <div class="city-info">
+                                <h3 class="city-name">Veliko Tarnovo</h3>
+                                <p class="city-region">Veliko Tarnovo</p>
+                                <p class="city-population">Pop: 66K</p>
+                            </div>
+                            <i class="fas fa-map-marker-alt city-icon"></i>
+                        </div>
+
+                        <div class="city-card" data-city="lovech">
+                            <div class="city-info">
+                                <h3 class="city-name">Lovech</h3>
+                                <p class="city-region">Lovech</p>
+                                <p class="city-population">Pop: 36K</p>
+                            </div>
+                            <i class="fas fa-map-marker-alt city-icon"></i>
+                        </div>
+
+                        <div class="city-card" data-city="batak">
+                            <div class="city-info">
+                                <h3 class="city-name">Batak</h3>
+                                <p class="city-region">Pazardzhik</p>
+                                <p class="city-population">Pop: 3.4K</p>
+                            </div>
+                            <i class="fas fa-map-marker-alt city-icon"></i>
+                        </div>
+
+                        <div class="city-card" data-city="koprivshtitsa">
+                            <div class="city-info">
+                                <h3 class="city-name">Koprivshtitsa</h3>
+                                <p class="city-region">Sofia</p>
+                                <p class="city-population">Pop: 2.4K</p>
+                            </div>
+                            <i class="fas fa-map-marker-alt city-icon"></i>
+                        </div>
+
+                        <div class="city-card" data-city="melnik">
+                            <div class="city-info">
+                                <h3 class="city-name">Melnik</h3>
+                                <p class="city-region">Blagoevgrad</p>
+                                <p class="city-population">Pop: 385</p>
+                            </div>
+                            <i class="fas fa-map-marker-alt city-icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Map Section -->
+            <section class="map-section">
+                <div class="map-container">
+                    <div id="map"></div>
+                    <button id="resetBtn" class="reset-button" style="display: none;">
+                        <i class="fas fa-sync-alt"></i>
+                        Reset View
+                    </button>
+                </div>
+            </section>
+        </div>
+
+        <!-- Selected City Details -->
+        <section id="selectedCityDetails" class="selected-city-details" style="display: none;">
+            <div class="city-details-content">
+                <h2 id="selectedCityTitle" class="selected-city-title"></h2>
+                <p id="selectedCityDescription" class="selected-city-description"></p>
+                <button class="explore-button" id="exploreButton">
+                    <span>Explore</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Experience Content Section -->
+        <section id="experienceContent" class="experience-content-section" style="display: none;">
+            <div class="experience-layout">
+                <!-- Left Side - Tour Stops -->
+                <div class="tour-stops-wrapper">
+                    <h3 class="experience-content-title">Tour Stops</h3>
+                    <div class="stops-list">
+                        <div class="stop-item">
+                            <span class="stop-text">Medieval fortress Hotalich.</span>
+                        </div>
+                        <div class="stop-item">
+                            <span class="stop-text">Clock Tower & Town History Museum.</span>
+                        </div>
+                        <div class="stop-item">
+                            <span class="stop-text">Sevlievo Art Gallery.</span>
+                        </div>
+                    </div>
+                    
+                    <div class="hidden-gem-section">
+                        <h4 class="hidden-gem-title">Hidden Gem</h4>
+                        <p class="hidden-gem-text">Walk along the Rositsa River</p>
+                    </div>
+                    
+                    <div class="audio-guide-section">
+                        <button class="audio-guide-button" onclick="startAudioGuide()">
+                            <i class="fas fa-volume-up"></i>
+                            <span>Audio Guide</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right Side - Attraction Photos -->
+                <div class="attractions-photos-wrapper">
+                    <h3 class="photos-title">Sevlievo Attractions</h3>
+                    <div class="photos-grid">
+                        <div class="photo-item">
+                            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop" alt="Hotalich Fortress" class="attraction-photo">
+                            <div class="photo-caption">
+                                <h4 class="photo-title">Hotalich Fortress</h4>
+                                <p class="photo-description">Medieval fortress ruins with panoramic views</p>
+                            </div>
+                        </div>
+                        
+                        <div class="photo-item">
+                            <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=400&h=300&fit=crop" alt="Clock Tower" class="attraction-photo">
+                            <div class="photo-caption">
+                                <h4 class="photo-title">Clock Tower</h4>
+                                <p class="photo-description">Historic clock tower in the town center</p>
+                            </div>
+                        </div>
+                        
+                        <div class="photo-item">
+                            <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=400&h=300&fit=crop" alt="Rositsa River" class="attraction-photo">
+                            <div class="photo-caption">
+                                <h4 class="photo-title">Rositsa River</h4>
+                                <p class="photo-description">Peaceful river walk and natural beauty</p>
+                            </div>
+                        </div>
+                        
+                        <div class="photo-item">
+                            <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400&h=300&fit=crop" alt="Sevlievo Art Gallery" class="attraction-photo">
+                            <div class="photo-caption">
+                                <h4 class="photo-title">Art Gallery</h4>
+                                <p class="photo-description">Local art and cultural exhibitions</p>
+                            </div>
+                        </div>
+                        
+                        <div class="photo-item">
+                            <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop" alt="Town History Museum" class="attraction-photo">
+                            <div class="photo-caption">
+                                <h4 class="photo-title">History Museum</h4>
+                                <p class="photo-description">Rich local history and artifacts</p>
+                            </div>
+                        </div>
+                        
+                        <div class="photo-item">
+                            <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=300&fit=crop" alt="Sevlievo Town Center" class="attraction-photo">
+                            <div class="photo-caption">
+                                <h4 class="photo-title">Town Center</h4>
+                                <p class="photo-description">Charming central square and architecture</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sevlievo Photo Gallery -->
+        <div id="experiencePage" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #ffffff; z-index: 9999; display: none; padding: 50px; color: #000000; font-size: 18px; overflow-y: auto;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <button onclick="showMapPage()" style="background: #a5d6a7; color: white; padding: 15px 25px; font-size: 16px; border: none; cursor: pointer; border-radius: 8px; margin-bottom: 30px;">
+                    ← Back to Map
+                </button>
+                
+                <h1 style="font-size: 2.5rem; color: #000000; margin-bottom: 20px;">Sevlievo</h1>
+                <p style="font-size: 1.25rem; color: #000000; margin-bottom: 40px;">A charming town in central Bulgaria with medieval fortress and local charm</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                    <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border: 1px solid #e2e8f0;">
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop" style="width: 100%; height: 250px; object-fit: cover;">
+                        <p style="padding: 20px; font-size: 1rem; color: #000000; font-weight: 500; margin: 0; text-align: center;">Town Center with Clock Tower</p>
+                    </div>
+                    
+                    <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border: 1px solid #e2e8f0;">
+                        <img src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=400&h=300&fit=crop" style="width: 100%; height: 250px; object-fit: cover;">
+                        <p style="padding: 20px; font-size: 1rem; color: #000000; font-weight: 500; margin: 0; text-align: center;">Hotalich Fortress - Medieval Ruins</p>
+                    </div>
+                    
+                    <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border: 1px solid #e2e8f0;">
+                        <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=400&h=300&fit=crop" style="width: 100%; height: 250px; object-fit: cover;">
+                        <p style="padding: 20px; font-size: 1rem; color: #000000; font-weight: 500; margin: 0; text-align: center;">Rositsa River - Hidden Gem</p>
+                    </div>
+                    
+                    <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border: 1px solid #e2e8f0;">
+                        <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400&h=300&fit=crop" style="width: 100%; height: 250px; object-fit: cover;">
+                        <p style="padding: 20px; font-size: 1rem; color: #000000; font-weight: 500; margin: 0; text-align: center;">Beautiful Bulgarian Countryside</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

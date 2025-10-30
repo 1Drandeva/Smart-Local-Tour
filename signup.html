@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Bulgaria Local Experience</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .register-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            background: #ffffff;
+            padding: 20px;
+            position: relative;
+            padding-top: 80px;
+        }
+        
+        /* Bulgarian Embroidery Background Pattern */
+        .register-container::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
+            background: 
+                /* Base subtle gradient */
+                linear-gradient(135deg, rgba(248, 249, 250, 0.8) 0%, rgba(233, 236, 239, 0.9) 100%),
+                /* Bulgarian embroidery pattern using CSS */
+                /* Traditional cross-stitch pattern */
+                repeating-linear-gradient(
+                    0deg,
+                    transparent 0px,
+                    transparent 19px,
+                    rgba(165, 214, 167, 0.15) 20px,
+                    rgba(165, 214, 167, 0.15) 21px,
+                    transparent 22px,
+                    transparent 39px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent 0px,
+                    transparent 19px,
+                    rgba(129, 199, 132, 0.12) 20px,
+                    rgba(129, 199, 132, 0.12) 21px,
+                    transparent 22px,
+                    transparent 39px
+                ),
+                /* Diagonal embroidery lines */
+                repeating-linear-gradient(
+                    45deg,
+                    transparent 0px,
+                    transparent 29px,
+                    rgba(201, 232, 203, 0.08) 30px,
+                    rgba(201, 232, 203, 0.08) 31px,
+                    transparent 32px,
+                    transparent 59px
+                ),
+                repeating-linear-gradient(
+                    -45deg,
+                    transparent 0px,
+                    transparent 29px,
+                    rgba(165, 214, 167, 0.06) 30px,
+                    rgba(165, 214, 167, 0.06) 31px,
+                    transparent 32px,
+                    transparent 59px
+                ),
+                /* Traditional Bulgarian flower motifs (simplified) */
+                radial-gradient(circle at 25% 25%, rgba(165, 214, 167, 0.1) 3px, transparent 3px),
+                radial-gradient(circle at 75% 25%, rgba(129, 199, 132, 0.08) 2px, transparent 2px),
+                radial-gradient(circle at 25% 75%, rgba(201, 232, 203, 0.09) 2.5px, transparent 2.5px),
+                radial-gradient(circle at 75% 75%, rgba(165, 214, 167, 0.07) 3.5px, transparent 3.5px),
+                radial-gradient(circle at 50% 50%, rgba(129, 199, 132, 0.05) 1.5px, transparent 1.5px);
+            background-size:
+                100% 100%,
+                40px 40px,
+                40px 40px,
+                60px 60px,
+                60px 60px,
+                80px 80px,
+                100px 100px,
+                90px 90px,
+                110px 110px,
+                120px 120px;
+            opacity: 0.3;
+        }
+        
+        .register-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 700px;
+            overflow: hidden;
+            display: flex;
+            min-height: 450px;
+        }
+        
+        .register-left {
+            flex: 1;
+            background: linear-gradient(135deg, #c8e6c9 0%, #a5d6a7 100%);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            text-align: center;
+            color: black;
+            padding-top: 40px;
+        }
+        
+        .register-right {
+            flex: 1;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .register-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .register-subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+        
+        .register-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .register-features li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+        
+        .register-features i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .form-content {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #374151;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #4caf50;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+        }
+        
+        .form-input.error {
+            border-color: #ef4444;
+        }
+        
+        .error-message {
+            color: #ef4444;
+            font-size: 0.875rem;
+            margin-top: 5px;
+        }
+        
+        .form-button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 8px;
+        }
+        
+        .form-button:hover {
+            background: linear-gradient(135deg, #45a049 0%, #3d8b40 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+        }
+        
+        .form-button:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+            color: #64748b;
+        }
+        
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e2e8f0;
+        }
+        
+        .divider span {
+            background: white;
+            padding: 0 15px;
+        }
+        
+        .social-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .social-button {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+        
+        .social-button:hover {
+            border-color: #4caf50;
+            color: #4caf50;
+        }
+        
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .back-link a {
+            color: #4caf50;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .success-message {
+            background: #d1fae5;
+            color: #065f46;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #a7f3d0;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 10px;
+        }
+        
+        .loading.show {
+            display: block;
+        }
+        
+        .spinner {
+            border: 3px solid #f3f4f6;
+            border-top: 3px solid #4caf50;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .terms-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .terms-checkbox input[type="checkbox"] {
+            margin-top: 2px;
+        }
+        
+        .terms-text {
+            font-size: 0.9rem;
+            color: #64748b;
+            line-height: 1.4;
+        }
+        
+        .terms-text a {
+            color: #4caf50;
+            text-decoration: none;
+        }
+        
+        .terms-text a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .register-card {
+                flex-direction: column;
+                max-width: 400px;
+            }
+            
+            .register-left {
+                padding: 30px 20px;
+            }
+            
+            .register-right {
+                padding: 30px 20px;
+            }
+            
+            .register-logo {
+                font-size: 1.5rem;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <div class="register-card">
+            <div class="register-left">
+                <div class="register-logo">Bulgaria Local Experience</div>
+                <div class="register-subtitle">Join thousands of travelers discovering Bulgaria's hidden gems</div>
+                <ul class="register-features">
+                    <li><i class="fas fa-check"></i> AI-powered personalized tours</li>
+                    <li><i class="fas fa-check"></i> Offline maps and guides</li>
+                    <li><i class="fas fa-check"></i> Local business discounts</li>
+                    <li><i class="fas fa-check"></i> AR/VR experiences</li>
+                    <li><i class="fas fa-check"></i> Exclusive seasonal tours</li>
+                </ul>
+            </div>
+            
+            <div class="register-right">
+                <!-- Registration Form -->
+                <div id="register-form" class="form-content active">
+                    <h2 style="text-align: center; margin-bottom: 30px; color: #374151;">Create Your Account</h2>
+                    <form onsubmit="handleRegistration(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="first-name">First Name</label>
+                                <input type="text" id="first-name" class="form-input" required placeholder="Enter your first name">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label" for="last-name">Last Name</label>
+                                <input type="text" id="last-name" class="form-input" required placeholder="Enter your last name">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="email">Email Address</label>
+                            <input type="email" id="email" class="form-input" required placeholder="Enter your email address">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="phone">Phone Number (Optional)</label>
+                            <input type="tel" id="phone" class="form-input" placeholder="Enter your phone number">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="password">Password</label>
+                            <input type="password" id="password" class="form-input" required placeholder="Create a strong password" minlength="8">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="confirm-password">Confirm Password</label>
+                            <input type="password" id="confirm-password" class="form-input" required placeholder="Confirm your password">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="country">Country</label>
+                            <select id="country" class="form-input" required>
+                                <option value="">Select your country</option>
+                                <option value="BG">Bulgaria</option>
+                                <option value="US">United States</option>
+                                <option value="UK">United Kingdom</option>
+                                <option value="DE">Germany</option>
+                                <option value="FR">France</option>
+                                <option value="IT">Italy</option>
+                                <option value="ES">Spain</option>
+                                <option value="NL">Netherlands</option>
+                                <option value="AT">Austria</option>
+                                <option value="CH">Switzerland</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="terms-checkbox">
+                            <input type="checkbox" id="terms" required>
+                            <label for="terms" class="terms-text">
+                                I agree to the <a href="#" onclick="showTerms()">Terms of Service</a> and <a href="#" onclick="showPrivacy()">Privacy Policy</a>
+                            </label>
+                        </div>
+                        
+                        <div class="terms-checkbox">
+                            <input type="checkbox" id="newsletter">
+                            <label for="newsletter" class="terms-text">
+                                I would like to receive updates about new features and special offers
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="form-button">Create Account</button>
+                        
+                        <div class="loading" id="register-loading">
+                            <div class="spinner"></div>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="divider">
+                    <span>or continue with</span>
+                </div>
+                
+                <div class="social-buttons">
+                    <button class="social-button" onclick="signUpWithGoogle()">
+                        <i class="fab fa-google"></i>
+                        Google
+                    </button>
+                    <button class="social-button" onclick="signUpWithFacebook()">
+                        <i class="fab fa-facebook"></i>
+                        Facebook
+                    </button>
+                </div>
+                
+                <div class="back-link">
+                    <p style="text-align: center; margin: 20px 0 10px 0; color: #64748b;">
+                        Already have an account? <a href="register.html" style="color: #4caf50; text-decoration: none; font-weight: 500;">Sign In</a>
+                    </p>
+                    <a href="index.html">← Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function handleRegistration(event) {
+            event.preventDefault();
+            
+            const firstName = document.getElementById('first-name').value;
+            const lastName = document.getElementById('last-name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const country = document.getElementById('country').value;
+            const terms = document.getElementById('terms').checked;
+            
+            // Clear previous errors
+            clearErrors();
+            
+            // Validate form
+            let hasErrors = false;
+            
+            if (password !== confirmPassword) {
+                showError('confirm-password', 'Passwords do not match');
+                hasErrors = true;
+            }
+            
+            if (password.length < 8) {
+                showError('password', 'Password must be at least 8 characters');
+                hasErrors = true;
+            }
+            
+            if (!terms) {
+                showError('terms', 'You must agree to the Terms of Service and Privacy Policy');
+                hasErrors = true;
+            }
+            
+            if (hasErrors) return;
+            
+            // Show loading
+            showLoading('register-loading');
+            
+            // Simulate API call
+            setTimeout(() => {
+                hideLoading('register-loading');
+                showSuccess('Account created successfully! Welcome to Bulgaria Local Experience!');
+                
+                // Redirect to premium explore after 3 seconds
+                setTimeout(() => {
+                    window.location.href = 'premium-explore.html';
+                }, 3000);
+            }, 2000);
+        }
+        
+        function signUpWithGoogle() {
+            alert('Google Sign-Up would be implemented here');
+        }
+        
+        function signUpWithFacebook() {
+            alert('Facebook Sign-Up would be implemented here');
+        }
+        
+        function showTerms() {
+            alert('Terms of Service would be displayed here');
+        }
+        
+        function showPrivacy() {
+            alert('Privacy Policy would be displayed here');
+        }
+        
+        function showError(fieldId, message) {
+            const field = document.getElementById(fieldId);
+            if (field) {
+                field.classList.add('error');
+            }
+            
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.textContent = message;
+            
+            if (field) {
+                field.parentNode.appendChild(errorDiv);
+            } else {
+                // For checkbox errors, add to the form
+                const form = document.querySelector('form');
+                form.insertBefore(errorDiv, form.firstChild);
+            }
+        }
+        
+        function clearErrors() {
+            document.querySelectorAll('.form-input').forEach(input => input.classList.remove('error'));
+            document.querySelectorAll('.error-message').forEach(error => error.remove());
+            document.querySelectorAll('.success-message').forEach(success => success.remove());
+        }
+        
+        function showLoading(loadingId) {
+            document.getElementById(loadingId).classList.add('show');
+        }
+        
+        function hideLoading(loadingId) {
+            document.getElementById(loadingId).classList.remove('show');
+        }
+        
+        function showSuccess(message) {
+            const successDiv = document.createElement('div');
+            successDiv.className = 'success-message';
+            successDiv.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+            
+            const form = document.querySelector('form');
+            form.insertBefore(successDiv, form.firstChild);
+        }
+        
+        // Check if user came from premium plan
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const plan = urlParams.get('plan');
+            
+            if (plan === 'premium') {
+                document.querySelector('.register-subtitle').textContent = 'Unlock premium features and start your personalized Bulgaria journey';
+            } else if (plan === 'annual') {
+                document.querySelector('.register-subtitle').textContent = 'Get the best value with our annual pass - save 33%!';
+            }
+        });
+    </script>
+</body>
+</html>
